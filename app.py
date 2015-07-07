@@ -13,14 +13,13 @@ def api_url(url_bit):
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('index.html')
 
 @app.route('/deals/')
 def list_deals():
     url = api_url("deals")
     r = requests.get(url)
     return render_template('deallist.html', deal_list=r.json()['data'])
-
 
 @app.route('/confirms/')
 def list_confirms():
@@ -29,7 +28,6 @@ def list_confirms():
     confirm_list = [d for d in r.json()['data'] if d['stage_id'] == 6]
     return render_template('deallist.html', deal_list=confirm_list)
 
-
 @app.route('/deals/<deal_id>')
 def show_deal(deal_id):
     url = api_url("deals/"+deal_id)
@@ -37,7 +35,6 @@ def show_deal(deal_id):
     return '<pre>' + pprint.pformat(r.json()) + '</pre>'
 
 
-
-
 if __name__ == '__main__':
+    app.debug = True
     app.run()
