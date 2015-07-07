@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>Q-plastic deal lijst</title>
+</head>
+<body>
+<h1>Deals</h1>
+<ul>
+{% for d in deal_list %}
+    <li>
+        <a href="mailto:{{ d.person_id.email.0.value }}"><i class="fa fa-envelope"></i></a> -
+        <a href="tel:{{ d.person_id.phone.0.value }}"><i class="fa fa-phone"></i></a> -
+        <a href="/deals/{{ d.id }}">{{ d.title }}</a>
+    </li>
+{% endfor %}
+</ul>
+</body>
+</html>
